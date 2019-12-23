@@ -25,6 +25,7 @@
 #include "BRMerkleBlock.h"
 #include "BRCrypto.h"
 #include "BRAddress.h"
+#include "allium/allium_hash.h"
 #include <stdlib.h>
 #include <inttypes.h>
 #include <limits.h>
@@ -136,7 +137,7 @@ BRMerkleBlock *BRMerkleBlockParse(const uint8_t *buf, size_t bufLen)
         }
         
         BRSHA256_2(&block->blockHash, buf, 80);
-        BRScrypt(&block->powHash, sizeof(block->powHash), buf, 80, buf, 80, 1024, 1, 1);
+        BRAllium(&block->powHash, sizeof(block->powHash), buf);
     }
     
     return block;
